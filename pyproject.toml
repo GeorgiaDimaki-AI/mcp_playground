@@ -1,0 +1,17 @@
+[project]
+name = "game-rules-mcp-server"
+version = "0.1.0"
+description = "MCP server for querying game rules from PDF files"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "PyPDF2>=3.0.0",
+    "pydantic>=2.0.0"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+game-rules-server = "game_rules_server:main"
