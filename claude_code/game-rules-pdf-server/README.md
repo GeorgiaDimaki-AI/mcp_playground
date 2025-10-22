@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server that provides access to game rule PDFs, enabling AI assistants to help users understand and query board game rules.
 
+**Built with**: Claude Code | **See the prompt**: [PROMPT.md](PROMPT.md)
+
+> This project was generated using Claude Code from a simple prompt. The original prompt and implementation details are documented in [PROMPT.md](PROMPT.md) to enable fair comparisons across different AI coding tools.
+
 ## Features
 
 - **Resources**: Access complete game rulebooks as resources

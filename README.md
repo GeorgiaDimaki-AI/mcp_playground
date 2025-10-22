@@ -16,12 +16,19 @@ This repository is organized by AI coding vendor/tool, with each having their ow
 ```
 mcp_playground/
 ├── README.md (this file)
+├── prompts/              # Documented prompts for fair comparisons
 ├── claude_code/          # Projects built with Claude Code
 │   └── game-rules-pdf-server/
 ├── cursor/               # Projects built with Cursor (future)
 ├── copilot/             # Projects built with GitHub Copilot (future)
 └── ...                  # Other AI tools as needed
 ```
+
+## Prompts for Fair Comparison
+
+Each project includes a `PROMPT.md` file documenting the original prompt used to generate it. This enables fair comparisons across different AI coding tools.
+
+**See**: [prompts/README.md](prompts/README.md) for a list of available prompts and how to use them for comparison testing.
 
 ## Current Projects by Vendor
 
