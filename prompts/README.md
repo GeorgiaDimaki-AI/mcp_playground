@@ -1,96 +1,163 @@
 # Prompts Directory
 
-This directory contains the prompts used to generate projects in this playground. These prompts enable fair comparisons across different AI coding tools.
+This directory contains vendor-agnostic prompts used to generate projects in this playground. Each prompt can be used with any AI coding tool to enable fair comparisons.
 
 ## Purpose
 
-By documenting the original prompts:
-- **Reproducibility**: Others can try the same prompt with different AI tools
+By documenting prompts in a central, vendor-agnostic location:
+- **Reproducibility**: Anyone can try the same prompt with different AI tools
 - **Fair Comparison**: Same starting point for all implementations
 - **Learning**: Understand how different AI tools interpret requirements
-- **Experimentation**: Modify prompts to test different approaches
+- **Cross-Vendor Tracking**: One prompt file tracks all implementations across vendors
+- **No Duplication**: Single source of truth for each prompt
+
+## Structure
+
+Each prompt is a separate markdown file in this directory containing:
+- The original prompt (verbatim)
+- A structured version with clear requirements
+- List of ALL implementations (across all vendors)
+- Comparison criteria and evaluation framework
+- Variations to try
 
 ## Available Prompts
 
-### Game Rules PDF Server
+### 1. Game Rules PDF Server
 
-**File**: See [claude_code/game-rules-pdf-server/PROMPT.md](../claude_code/game-rules-pdf-server/PROMPT.md)
+**File**: [game-rules-pdf-server.md](game-rules-pdf-server.md)
+
+**Type**: MCP Server | **Difficulty**: Intermediate
 
 **Summary**: Create an MCP server for querying game rules from PDF files
 
-**Implemented By**:
-- ✅ Claude Code - [claude_code/game-rules-pdf-server/](../claude_code/game-rules-pdf-server/)
+**Implementations**:
+- ✅ Claude Code → [claude_code/game-rules-pdf-server/](../claude_code/game-rules-pdf-server/)
+- ⏳ Cursor → *Try it and add your implementation!*
+- ⏳ GitHub Copilot → *Try it and add your implementation!*
+- ⏳ Other tools → *Try it and add your implementation!*
 
-**Try with**:
-- Cursor
-- GitHub Copilot
-- Codeium
-- Other AI coding tools
+**Skills Tested**: PDF parsing, MCP protocol, API design, documentation
+
+---
 
 ## How to Use These Prompts
 
+### For Trying a New Implementation
+
 1. **Choose a prompt** from the list above
-2. **Open your AI coding tool** (Cursor, Copilot, etc.)
-3. **Copy the structured prompt** from the PROMPT.md file
-4. **Let the AI generate** the implementation
-5. **Compare results** with existing implementations
-6. **Document your findings** (optional but encouraged!)
+2. **Open the prompt file** (e.g., `game-rules-pdf-server.md`)
+3. **Copy the prompt** (original or structured version)
+4. **Open your AI coding tool** (Cursor, Copilot, etc.)
+5. **Paste and run** the prompt
+6. **Save the implementation** to `<vendor>/<project-name>/`
+7. **Update the prompt file** with your implementation details
+
+### For Comparing Implementations
+
+1. **Pick a prompt** that has multiple implementations
+2. **Review each implementation** in different vendor folders
+3. **Use the comparison criteria** in the prompt file
+4. **Document interesting differences** or insights
 
 ## Adding New Prompts
 
-When adding a new project to the playground:
+When you create a new project in the playground:
 
-1. Create a `PROMPT.md` file in the project directory
-2. Include:
-   - Original request (verbatim)
-   - Structured version
-   - Date and AI tool used
-   - Implementation notes
-3. Reference it in this README
-4. Tag it with which tools have implemented it
+1. **Create a prompt file**: `prompts/<project-name>.md`
+2. **Use this template structure**:
+   ```markdown
+   # Prompt: Project Name
+
+   ## The Prompt
+   ### Original Request
+   (your exact words)
+
+   ### Structured Version
+   (clear requirements)
+
+   ## Implementations
+   ### ✅ Tool Name
+   - Location: ...
+   - Features: ...
+
+   ## Comparison Criteria
+   (what to compare)
+   ```
+3. **Add to this README** in the "Available Prompts" section
+4. **Reference from your project** README back to the central prompt
 
 ## Comparison Framework
 
-When comparing implementations, consider:
+The prompts include detailed comparison criteria, but generally evaluate:
 
 ### Functionality
-- Does it meet the core requirements?
-- What additional features were added?
-- Are there any missing features?
+- Core requirements met
+- Additional features
+- Missing features
+- Edge case handling
 
 ### Code Quality
-- Project structure and organization
-- Code readability and maintainability
+- Project structure
+- Readability
 - Error handling
-- Type hints and validation
+- Type safety
+- Testing
 
 ### Documentation
-- README quality and completeness
-- Code comments
+- README completeness
 - Setup instructions
-- Examples and usage guides
+- Usage examples
+- Code comments
+- Troubleshooting
+
+### Developer Experience
+- Installation ease
+- Dependencies
+- Configuration
+- Time to first run
 
 ### User Experience
-- Ease of installation
-- Configuration complexity
+- Feature discoverability
 - Error messages
-- Example files and templates
+- Performance
+- Reliability
 
-### Development Process
-- Time to completion
-- Number of iterations needed
-- Questions asked by the AI
-- Issues encountered
+## Contributing Your Implementations
 
-## Contributing
+If you implement a prompt with a different AI tool:
 
-This is a personal playground, but if you try these prompts with other AI tools:
+1. **Create vendor folder** if it doesn't exist (e.g., `cursor/`)
+2. **Create project folder** matching the prompt name
+3. **Add your implementation**
+4. **Update the prompt file** with:
+   - Tool name and status (✅)
+   - Implementation location
+   - Date and language used
+   - Key features and notable choices
+5. **Update this README** if adding a new tool
+6. **Commit with description** of your implementation
 
-1. Create a new vendor folder (e.g., `cursor/`, `copilot/`)
-2. Implement the project there
-3. Document which prompt you used
-4. Note any variations or clarifications needed
+## Why This Structure?
+
+**Before** (vendor-specific prompts):
+```
+claude_code/project/PROMPT.md  ← Claude's prompt
+cursor/project/PROMPT.md        ← Cursor's prompt (duplicate!)
+```
+Problem: Prompts drift, hard to compare, duplication
+
+**After** (central prompts):
+```
+prompts/project.md              ← Single source of truth
+  ├─ Lists: claude_code/project/
+  └─ Lists: cursor/project/
+```
+Benefits: No duplication, easy comparison, tracks all implementations
 
 ---
+
+**Last Updated**: 2025-10-22
+**Total Prompts**: 1
+**Total Implementations**: 1
 
 **Remember**: The goal is learning and comparison, not competition. Each AI tool has different strengths, and the "best" implementation depends on your specific needs and preferences.
