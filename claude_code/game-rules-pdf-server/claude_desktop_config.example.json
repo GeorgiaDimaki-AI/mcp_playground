@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "game-rules": {
+      "command": "python",
+      "args": ["/ABSOLUTE/PATH/TO/mcp_playground/claude_code/game-rules-pdf-server/game_rules_server.py"],
+      "env": {}
+    }
+  }
+}

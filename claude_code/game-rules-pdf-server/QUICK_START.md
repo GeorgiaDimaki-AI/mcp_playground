@@ -36,7 +36,7 @@ Add this configuration (update the path to match your installation):
   "mcpServers": {
     "game-rules": {
       "command": "python",
-      "args": ["/full/path/to/mcp_playground/game_rules_server.py"]
+      "args": ["/full/path/to/mcp_playground/claude_code/game-rules-pdf-server/game_rules_server.py"]
     }
   }
 }

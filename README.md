@@ -1,203 +1,87 @@
-# Game Rules MCP Server
+# MCP Playground
 
-A Model Context Protocol (MCP) server that provides access to game rule PDFs, enabling AI assistants to help users understand and query board game rules.
+A playground repository for experimenting with different AI coding tools and their implementations of various tasks. This repo serves as a comparison and learning space for understanding how different AI assistants approach the same problems.
 
-## Features
+## Purpose
 
-- **Resources**: Access complete game rulebooks as resources
-- **Search**: Search for specific rules or keywords within game PDFs
-- **List Games**: View all available game rulebooks
-- **Summaries**: Get quick summaries and metadata about game rules
+This repository is organized by AI coding vendor/tool, with each having their own folder containing various projects. The goal is to:
 
-## Installation
+- Compare different AI coding approaches to similar tasks
+- Learn best practices from different AI tools
+- Build a collection of useful implementations
+- Experiment with new AI coding capabilities
 
-1. Clone this repository:
-```bash
-git clone <repository-url>
-cd mcp_playground
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-Or using pip with pyproject.toml:
-```bash
-pip install -e .
-```
-
-## Adding Game Rules
-
-Place your game rule PDF files in the `game_rules/` directory. The files should be named descriptively, using lowercase with hyphens or underscores:
-
-```
-game_rules/
-├── chess.pdf
-├── monopoly.pdf
-├── settlers-of-catan.pdf
-└── dungeons-and-dragons.pdf
-```
-
-## Usage
-
-### Running the Server
-
-The server uses stdio for communication:
-
-```bash
-python game_rules_server.py
-```
-
-### Configuring with Claude Desktop
-
-Add this server to your Claude Desktop configuration file:
-
-**MacOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-**Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "game-rules": {
-      "command": "python",
-      "args": ["/path/to/mcp_playground/game_rules_server.py"]
-    }
-  }
-}
-```
-
-Or if installed with pip:
-```json
-{
-  "mcpServers": {
-    "game-rules": {
-      "command": "game-rules-server"
-    }
-  }
-}
-```
-
-### Configuring with Other MCP Clients
-
-Use the standard MCP stdio protocol to connect to the server:
-
-```python
-# Example Python client
-import asyncio
-from mcp.client import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
-
-server_params = StdioServerParameters(
-    command="python",
-    args=["game_rules_server.py"]
-)
-
-async with stdio_client(server_params) as (read, write):
-    async with ClientSession(read, write) as session:
-        await session.initialize()
-        # Use the session...
-```
-
-## Available Tools
-
-### 1. `list_games`
-Lists all available game rulebooks in the system.
-
-**Parameters**: None
-
-**Example**:
-```
-list_games()
-```
-
-### 2. `search_game_rules`
-Search for specific text or rules within a game's rulebook.
-
-**Parameters**:
-- `game` (required): Name of the game (without .pdf extension)
-- `query` (required): Text to search for in the rules
-- `case_sensitive` (optional): Whether search should be case-sensitive (default: false)
-
-**Example**:
-```
-search_game_rules(game="chess", query="castling")
-```
-
-### 3. `get_game_summary`
-Get a summary of a game's rules including page count and basic info.
-
-**Parameters**:
-- `game` (required): Name of the game (without .pdf extension)
-
-**Example**:
-```
-get_game_summary(game="monopoly")
-```
-
-## Available Resources
-
-Each PDF in the `game_rules/` directory is exposed as a resource with the URI format:
-
-```
-game://<game-name>
-```
-
-For example:
-- `game://chess` - Complete Chess rules
-- `game://monopoly` - Complete Monopoly rules
-
-## Example Queries
-
-Once configured with an AI assistant, you can ask questions like:
-
-- "What are the rules for castling in chess?"
-- "How do you win at Monopoly?"
-- "Search the Catan rules for 'longest road'"
-- "What games do you have available?"
-- "Give me a summary of the Dungeons and Dragons rules"
-
-## Development
-
-### Project Structure
+## Repository Structure
 
 ```
 mcp_playground/
-├── game_rules_server.py    # Main MCP server implementation
-├── game_rules/             # Directory for PDF files
-├── pyproject.toml          # Python project configuration
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-└── .gitignore            # Git ignore rules
+├── README.md (this file)
+├── claude_code/          # Projects built with Claude Code
+│   └── game-rules-pdf-server/
+├── cursor/               # Projects built with Cursor (future)
+├── copilot/             # Projects built with GitHub Copilot (future)
+└── ...                  # Other AI tools as needed
 ```
 
-### Dependencies
+## Current Projects by Vendor
 
-- `mcp>=1.0.0` - Model Context Protocol SDK
-- `PyPDF2>=3.0.0` - PDF parsing and text extraction
-- `pydantic>=2.0.0` - Data validation
+### Claude Code
 
-## Troubleshooting
+Located in `claude_code/` - See [claude_code/README.md](claude_code/README.md) for details.
 
-### PDFs Not Found
-- Ensure PDF files are in the `game_rules/` directory
-- Check that filenames use lowercase with hyphens or underscores
-- When calling tools, use the filename without the .pdf extension
+**Projects:**
+1. **game-rules-pdf-server** - An MCP server for querying game rules from PDF files
+   - Full-featured MCP implementation
+   - PDF parsing and text extraction
+   - Search and resource capabilities
+   - See [claude_code/game-rules-pdf-server/README.md](claude_code/game-rules-pdf-server/README.md)
 
-### Text Extraction Issues
-- Some PDFs with complex formatting may not extract perfectly
-- Scanned PDFs without OCR will not work (text-based PDFs only)
-- Try re-exporting the PDF with text selection enabled
+### Other Vendors
 
-### Server Connection Issues
-- Verify the path in your MCP client configuration is correct
-- Ensure Python and dependencies are installed
-- Check that the server starts without errors
+Additional folders can be added for other AI coding tools:
+- **cursor/** - Projects built with Cursor
+- **copilot/** - Projects built with GitHub Copilot
+- **codeium/** - Projects built with Codeium
+- **tabnine/** - Projects built with Tabnine
+- etc.
 
-## License
+## How to Use This Repo
 
-MIT License
+1. **Browse by vendor**: Explore different AI tools' approaches in their respective folders
+2. **Compare implementations**: Look at how different tools solve similar problems
+3. **Try the projects**: Each project has its own README with setup instructions
+4. **Add your own**: Create new vendor folders and projects as you experiment
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+This is a personal playground, but the structure can be adopted by anyone interested in comparing AI coding tools. Feel free to:
+
+- Add new vendor folders
+- Add new projects within existing vendor folders
+- Document interesting findings or comparisons
+- Experiment with cross-vendor collaborations
+
+## Why MCP?
+
+Many projects in this playground focus on the Model Context Protocol (MCP) because it provides:
+- A standardized way to extend AI assistants
+- Practical, real-world use cases
+- Good test cases for comparing AI coding capabilities
+- Useful tools that can be reused across different AI platforms
+
+## License
+
+MIT License - See individual projects for specific licenses if different.
+
+## Getting Started
+
+1. Choose a vendor folder (e.g., `claude_code/`)
+2. Navigate to a project (e.g., `game-rules-pdf-server/`)
+3. Read the project's README for setup instructions
+4. Try it out and compare with other implementations!
+
+---
+
+**Last Updated**: 2025-10-22
+**Active Vendors**: Claude Code
+**Total Projects**: 1
